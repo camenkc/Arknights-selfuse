@@ -100,31 +100,7 @@ def returnToIndex():
             break
 
 
-        
-def shouHuoJiJian():
-    returnToIndex()
-    time.sleep(0.1)
-    screenshot()
-    if Image_to_position('zhuYeJiJian', m = 0) != False:
-        print('zhuYeJiJian.png')
-        time.sleep(0.1)
-        click(center[0], center[1])
-    
-    time.sleep(5)
-    
-    screenshot()
-    if Image_to_position('jiJianTiXing', m = 0) != False:
-        print('jiJianTiXing.png')
-        time.sleep(0.1)
-        click(center[0], center[1])    
-    
-    for i in range(0,10):
-        time.sleep(0.3)
-        click(212,700)
-    time.sleep(0.1)
-    click(400,200)
-    
-    
+def changeStuff():
     #撤下所有干员
     screenshot()
     if Image_to_position('jinZhuZongLan', m = 0) != False:
@@ -490,9 +466,9 @@ def shouHuoJiJian():
         click(center[0], center[1])
         time.sleep(0.5)    
     
-    
-    
-    
+
+def getNewClue():
+
     ############################
     #收取会客室线索
     swipe(1167,368,200,368,500)
@@ -626,6 +602,36 @@ def shouHuoJiJian():
             click(center[0], center[1])
             time.sleep(0.5)
             
+def shouHuoJiJian(C11,C12):
+    returnToIndex()
+    time.sleep(0.1)
+    screenshot()
+    if Image_to_position('zhuYeJiJian', m = 0) != False:
+        print('zhuYeJiJian.png')
+        time.sleep(0.1)
+        click(center[0], center[1])
+    
+    time.sleep(5)
+    
+    screenshot()
+    if Image_to_position('jiJianTiXing', m = 0) != False:
+        print('jiJianTiXing.png')
+        time.sleep(0.1)
+        click(center[0], center[1])    
+    
+    for i in range(0,10):
+        time.sleep(0.3)
+        click(212,700)
+    time.sleep(0.1)
+    click(400,200)
+    
+    
+    
+    if C11:
+        changeStuff();
+    
+    if C12:
+        getNewClue();
     screenshot()
     if Image_to_position('houTuiJian', m = 0) != False:
             click(center[0], center[1])
@@ -729,11 +735,20 @@ if __name__ == '__main__':
         run()
         time.sleep(3)'''
     C1=False
+    C11=False
+    C12=False
     C2=False
     C3=False
     print('是否需要收取基建（1/0）：')
     if int(input())==1:
         C1=True;
+    if C1:
+        print('是否需要更换基建角色配置（1/0）：')
+        if int(input())==1:
+            C11=True
+        print('是否需要收取会客室线索（1/0）：')
+        if int(input())==1:
+            C12=True
     
     print('是否需要收取每日信用（1/0）：')
     if int(input())==1:
@@ -745,7 +760,7 @@ if __name__ == '__main__':
     
     returnToIndex()
     if C1:
-        shouHuoJiJian()#基建收菜  1280*720窗口模式下95%稳定性
+        shouHuoJiJian(C11,C12)#基建收菜  1280*720窗口模式下95%稳定性
     if C2:
         shouQuXinYong()#信用商店收取
     if C3:
